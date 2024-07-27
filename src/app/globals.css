@@ -31,3 +31,11 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: 'dancing-script';
+  src: url('/fonts/dancing-script.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
