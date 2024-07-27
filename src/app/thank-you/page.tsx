@@ -29,7 +29,7 @@ export default function ThankYou({
           <p className="text-gray-600 mb-6">
             Well be in touch with more details as the big day approaches.
           </p>
-          <Link href={`/?guest=${guestName}`} className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-indigo-700 transition duration-300">
+          <Link href={`/?guest=${guestName}`} className="inline-block bg-amber-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-amber-700 transition duration-300">
             Back to Home
           </Link>
         </div>

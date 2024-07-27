@@ -30,7 +30,7 @@ export default function Home({
   }
 
   return (
-    <main>
+    <main className='italic'>
       <section className='relative h-screen flex items-center justify-center'>
         <div
           className='absolute inset-0 bg-cover bg-center'
