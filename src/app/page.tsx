@@ -1,36 +1,36 @@
-import Image from 'next/image';
-import { redirect } from 'next/navigation'
+import { redirect } from 'next/navigation';
 import { ConfirmButton } from '../components/confirm-button';
 
 const GUEST_NAME = '';
 
 export default function Home({
-  params,
   searchParams,
 }: {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const guestName = searchParams['guest'] || GUEST_NAME;
   async function confirmRsvp(formData: FormData) {
     'use server';
 
-    const rsvp = formData.get('rsvp') as string; 
-    const res = await new Promise((resolve) => setTimeout(() => {
-      resolve(Math.random() < 0.5 ? 'OK' : 'NOK');
-    }, 1000));
+    const rsvp = formData.get('rsvp') as string;
+    // call database mock
+    const res = await new Promise((resolve) =>
+      setTimeout(() => {
+        resolve(Math.random() < 0.5 ? 'OK' : 'NOK');
+      }, 1000)
+    );
 
     if (res === 'OK') {
       console.log('Gracias por confirmar tu asistencia' + guestName + rsvp);
       redirect('/thank-you?guest=' + guestName);
     } else {
       console.log('No pudimos confirmar tu asistencia' + guestName + rsvp);
+      redirect('/oops?guest=' + guestName);
     }
   }
 
   return (
     <main>
-      {/* Hero Section */}
       <section className='relative h-screen flex items-center justify-center'>
         <div
           className='absolute inset-0 bg-cover bg-center'
@@ -41,10 +41,7 @@ export default function Home({
           <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
           <h2 className='text-3xl font-bold mb-4'>23/11/2024</h2>
           <p className='text-2xl mb-8'>¡Nos casamos!</p>
-          {/* greet the invitee */}
-          <p className='text-2xl mb-8'>
-            ¿Nos acompañarías {guestName}?
-          </p>
+          <p className='text-2xl mb-8'>¿Nos acompañarías {guestName}?</p>
           <a
             href='#rsvp'
             className='bg-amber-200 text-black px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition duration-300'
@@ -53,18 +50,11 @@ export default function Home({
           </a>
         </div>
       </section>
-
-      {/* RSVP Form Section */}
       <section id='rsvp' className='py-20 bg-white'>
         <div className='max-w-3xl mx-auto px-4'>
-          <h2 className='text-4xl font-bold text-center'>
-            Claudia & Fer
-          </h2>
-          <h2 className='text-2xl font-bold text-center mb-10'>
-            23/11/2024
-          </h2>
+          <h2 className='text-4xl font-bold text-center'>Claudia & Fer</h2>
+          <h2 className='text-2xl font-bold text-center mb-10'>23/11/2024</h2>
           <form className='space-y-6' action={confirmRsvp}>
-            {/* Dropdown with yes or no */}
             <div>
               <label
                 htmlFor='rsvp'

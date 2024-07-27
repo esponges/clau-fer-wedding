@@ -1,7 +1,13 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-export default function ThankYou() {
+export default function ThankYou({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const guestName = searchParams['guest'];
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
       <Head>
@@ -23,7 +29,7 @@ export default function ThankYou() {
           <p className="text-gray-600 mb-6">
             Well be in touch with more details as the big day approaches.
           </p>
-          <Link href="/" className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-indigo-700 transition duration-300">
+          <Link href={`/?guest=${guestName}`} className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-indigo-700 transition duration-300">
             Back to Home
           </Link>
         </div>
