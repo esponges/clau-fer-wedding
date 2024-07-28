@@ -3,12 +3,43 @@ import { ConfirmButton } from '../components/confirm-button';
 
 const GUEST_NAME = '';
 
-export default function Home({
+const GUEST_DB_DATA = {
+  name: 'Alma y Javier',
+  uuid: '12345678-1234-1234-1234-123456789012',
+  pax: 2,
+  status: 'pending', // rejected, pending, confirmed
+};
+
+const GUESTS: Record<string, typeof GUEST_DB_DATA> = {
+  '12345678-1234-1234-1234-123456789012': GUEST_DB_DATA,
+};
+
+async function getGuestData(
+  uuid?: string
+): Promise<typeof GUEST_DB_DATA | null> {
+  'use server';
+
+  if (!uuid) {
+    return null;
+  }
+
+  const data = await new Promise<typeof GUEST_DB_DATA>((resolve) => {
+    setTimeout(() => {
+      resolve(GUESTS[uuid]);
+    }, 1000);
+  });
+
+  return data;
+}
+
+export default async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
-  const guestName = searchParams['guest'] || GUEST_NAME;
+  const guestId = searchParams['guest'] || GUEST_NAME;
+  const guestData = await getGuestData(guestId);
+
   async function confirmRsvp(formData: FormData) {
     'use server';
 
@@ -21,11 +52,9 @@ export default function Home({
     );
 
     if (res === 'OK') {
-      console.log('Gracias por confirmar tu asistencia' + guestName + rsvp);
-      redirect('/thank-you?guest=' + guestName);
+      redirect('/thank-you?guest=' + guestData?.uuid);
     } else {
-      console.log('No pudimos confirmar tu asistencia' + guestName + rsvp);
-      redirect('/oops?guest=' + guestName);
+      redirect('/oops?guest=' + guestData?.uuid);
     }
   }
 
@@ -41,11 +70,14 @@ export default function Home({
           <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
           <h2 className='text-3xl font-bold mb-4'>23/11/2024</h2>
           <p className='text-2xl mb-8'>¡Nos casamos!</p>
-          <p className='text-2xl mb-8'>¿Nos acompañarías {guestName}?</p>
+          <p className='text-2xl mb-8'>
+            ¿Nos acompañaría{(guestData?.pax || 0) > 1 ? 'n' : 's'}{' '}
+            {guestData?.name}?
+          </p>
           <a
             href='#rsvp'
             className={`bg-amber-200 text-black px-8 py-3 rounded-full
-              ${!guestName ? 'hidden' : ''} 
+              ${!guestData?.name ? 'hidden' : ''} 
               font-semibold hover:bg-opacity-90 transition duration-300`}
           >
             Confirma tu asistencia
@@ -54,7 +86,7 @@ export default function Home({
       </section>
       <section
         id='rsvp'
-        className={`py-20 bg-white ${!guestName ? 'hidden' : ''}`}
+        className={`py-20 bg-white ${!guestData?.name ? 'hidden' : ''}`}
       >
         <div className='max-w-3xl mx-auto px-4'>
           <h2 className='text-4xl font-bold text-center'>Claudia & Fer</h2>
