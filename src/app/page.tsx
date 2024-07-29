@@ -50,17 +50,25 @@ export default async function Home({
     'use server';
 
     const rsvp = formData.get('rsvp') as string;
-    // call database mock
-    const res = await new Promise((resolve) =>
-      setTimeout(() => {
-        resolve(Math.random() < 0.5 ? 'OK' : 'NOK');
-      }, 1000)
-    );
+    const status = rsvp === 'yes' ? 'confirmed' : 'rejected';
+    const id = formData.get('id') as string;
 
-    if (res === 'OK') {
-      redirect('/thank-you?guest=' + guestData?.id);
-    } else {
-      redirect('/oops?guest=' + guestData?.id);
+    let redirectPath: string = '';
+    try {
+      const sqlClient = postgres(process.env.POSTGRES_DB_CONNECTION_STRING || '');
+      await sqlClient`
+        UPDATE guests
+        SET status = ${status}
+        WHERE id = ${id}
+      `;
+
+      console.log('Upserted ' + id);
+      redirectPath = `/thank-you?guest=${id}&status=${status}`;
+    } catch (error) {
+      console.error(error);
+      redirectPath = '/oops?guest=' + id;
+    } finally {
+      redirect(redirectPath);
     }
   }
 
@@ -98,6 +106,12 @@ export default async function Home({
           <h2 className='text-4xl font-bold text-center'>Claudia & Fer</h2>
           <h2 className='text-2xl font-bold text-center mb-10'>23/11/2024</h2>
           <form className='space-y-6' action={confirmRsvp}>
+            <input
+              type='hidden'
+              name='id'
+              value={guestData?.id}
+              className='hidden'
+            />
             <div>
               <label
                 htmlFor='rsvp'
