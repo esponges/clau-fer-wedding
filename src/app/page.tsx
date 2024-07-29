@@ -1,35 +1,41 @@
 import { redirect } from 'next/navigation';
+import postgres from 'postgres';
+
 import { ConfirmButton } from '../components/confirm-button';
 
 const GUEST_NAME = '';
 
-const GUEST_DB_DATA = {
-  name: 'Alma y Javier',
-  uuid: '12345678-1234-1234-1234-123456789012',
-  pax: 2,
-  status: 'pending', // rejected, pending, confirmed
-};
-
-const GUESTS: Record<string, typeof GUEST_DB_DATA> = {
-  '12345678-1234-1234-1234-123456789012': GUEST_DB_DATA,
+type GuestData = {
+  id: string;
+  name: string;
+  status: 'pending' | 'rejected' | 'confirmed';
+  pax: number;
 };
 
 async function getGuestData(
   uuid?: string
-): Promise<typeof GUEST_DB_DATA | null> {
+): Promise<GuestData | null> {
   'use server';
 
   if (!uuid) {
     return null;
   }
 
-  const data = await new Promise<typeof GUEST_DB_DATA>((resolve) => {
-    setTimeout(() => {
-      resolve(GUESTS[uuid]);
-    }, 1000);
-  });
+  try {
+    const sqlClient = postgres(process.env.POSTGRES_DB_CONNECTION_STRING || '');
 
-  return data;
+    const data = await sqlClient`
+      SELECT * FROM guests
+      WHERE id = ${uuid}
+    `;
+
+    const guest = data[0] as GuestData;
+
+    return guest;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 export default async function Home({
@@ -52,9 +58,9 @@ export default async function Home({
     );
 
     if (res === 'OK') {
-      redirect('/thank-you?guest=' + guestData?.uuid);
+      redirect('/thank-you?guest=' + guestData?.id);
     } else {
-      redirect('/oops?guest=' + guestData?.uuid);
+      redirect('/oops?guest=' + guestData?.id);
     }
   }
 
