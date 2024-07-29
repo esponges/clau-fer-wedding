@@ -46,6 +46,8 @@ export default async function Home({
   const guestId = searchParams['guest'] || GUEST_NAME;
   const guestData = await getGuestData(guestId);
 
+  console.log({ guestData });
+
   async function confirmRsvp(formData: FormData) {
     'use server';
 
