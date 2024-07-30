@@ -11,12 +11,16 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "next": "14.2.5",
+    "nodemailer": "^6.9.14",
+    "nodemailer-mailgun-transport": "^2.1.5",
     "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.15",
+    "@types/nodemailer-mailgun-transport": "^1.4.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

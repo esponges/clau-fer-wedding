@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
 import postgres from 'postgres';
+import nodemailer from 'nodemailer';
+import mg from 'nodemailer-mailgun-transport';
 
 import { ConfirmButton } from '../components/confirm-button';
 
@@ -57,6 +59,29 @@ export default async function Home({
 
     let redirectPath: string = '';
     try {
+      var auth = {
+        auth: {
+          api_key: process.env.MAIL_GUN_API_KEY || '',
+          domain: process.env.MAIL_GUN_DOMAIN || '',
+        }
+      }
+      
+      const nodemailerMailgun = nodemailer.createTransport(mg(auth));
+      
+      nodemailerMailgun.sendMail({
+        from: 'weloveyou@example.com',
+        to: 'esponges@gmail.com', // An array if you have multiple recipients.
+        subject: 'Hey you, awesome!',
+        text: 'Mailgun rocks, pow pow!',
+      }, function (err, info) {
+        if (err) {
+          console.log('Error: ' + err);
+        }
+        else {
+          console.log('Response: ' + info);
+        }
+      });
+
       const sqlClient = postgres(process.env.POSTGRES_DB_CONNECTION_STRING || '');
       await sqlClient`
         UPDATE guests
