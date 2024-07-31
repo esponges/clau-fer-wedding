@@ -55,6 +55,7 @@ export default async function Home({
     const rsvp = formData.get('rsvp') as string;
     const status = rsvp === 'yes' ? 'confirmed' : 'rejected';
     const id = formData.get('id') as string;
+    const guest = formData.get('guest') as string;
 
     let redirectPath: string = '';
     try {
@@ -65,8 +66,23 @@ export default async function Home({
         secure: true,
         auth: {
           user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASS,
+          pass: process.env.GMAIL_APP_PASS,
         },
+      });
+
+      const mailOptions = {
+        from: "clau-y-fer@gmail.com",
+        to: process.env.CONFIRMATION_EMAIL || process.env.GMAIL_USER,
+        subject: status === 'confirmed' ? "RSVP Confirmada" : "RSVP Rechazada",
+        text: status === 'confirmed' ? `${guest} ha confirmado su invitación` : `${guest} ha rechazado su invitación`,
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
       });
 
       const sqlClient = postgres(process.env.POSTGRES_DB_CONNECTION_STRING || '');
@@ -124,6 +140,12 @@ export default async function Home({
               type='hidden'
               name='id'
               value={guestData?.id}
+              className='hidden'
+            />
+            <input
+              type='hidden'
+              name='guest'
+              value={guestData?.name}
               className='hidden'
             />
             <div>
