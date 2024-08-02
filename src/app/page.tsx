@@ -3,6 +3,7 @@ import postgres from 'postgres';
 import nodemailer from 'nodemailer';
 
 import { ConfirmButton } from '../components/confirm-button';
+import { CountDown } from '@/components/countdown';
 
 const GUEST_NAME = '';
 
@@ -13,9 +14,7 @@ type GuestData = {
   pax: number;
 };
 
-async function getGuestData(
-  uuid?: string
-): Promise<GuestData | null> {
+async function getGuestData(uuid?: string): Promise<GuestData | null> {
   'use server';
 
   if (!uuid) {
@@ -60,8 +59,8 @@ export default async function Home({
     let redirectPath: string = '';
     try {
       const transporter = nodemailer.createTransport({
-        service: "Gmail",
-        host: "smtp.gmail.com",
+        service: 'Gmail',
+        host: 'smtp.gmail.com',
         port: 465,
         secure: true,
         auth: {
@@ -71,21 +70,26 @@ export default async function Home({
       });
 
       const mailOptions = {
-        from: "clau-y-fer@gmail.com",
+        from: 'clau-y-fer@gmail.com',
         to: process.env.CONFIRMATION_EMAIL || process.env.GMAIL_USER,
-        subject: status === 'confirmed' ? "RSVP Confirmada" : "RSVP Rechazada",
-        text: status === 'confirmed' ? `${guest} ha confirmado su invitación` : `${guest} ha rechazado su invitación`,
+        subject: status === 'confirmed' ? 'RSVP Confirmada' : 'RSVP Rechazada',
+        text:
+          status === 'confirmed'
+            ? `${guest} ha confirmado su invitación`
+            : `${guest} ha rechazado su invitación`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
           console.log(error);
         } else {
-          console.log("Email sent: " + info.response);
+          console.log('Email sent: ' + info.response);
         }
       });
 
-      const sqlClient = postgres(process.env.POSTGRES_DB_CONNECTION_STRING || '');
+      const sqlClient = postgres(
+        process.env.POSTGRES_DB_CONNECTION_STRING || ''
+      );
       await sqlClient`
         UPDATE guests
         SET status = ${status}
@@ -166,6 +170,13 @@ export default async function Home({
             </div>
             <ConfirmButton />
           </form>
+        </div>
+      </section>
+      <section id='venue' className='py-20 bg-gray-100'>
+        <div className='max-w-6xl mx-auto px-4'>
+          <CountDown
+            date={new Date('2024-11-23T19:00:00')}
+          />
         </div>
       </section>
       <section id='venue' className='py-20 bg-gray-50'>
