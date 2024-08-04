@@ -71,7 +71,7 @@ export default async function Home({
 
       const mailOptions = {
         from: 'clau-y-fer@gmail.com',
-        to: process.env.CONFIRMATION_EMAIL || process.env.GMAIL_USER,
+        to: process.env.CONFIRMATION_EMAIL?.split(';') || process.env.GMAIL_USER,
         subject: status === 'confirmed' ? 'RSVP Confirmada' : 'RSVP Rechazada',
         text:
           status === 'confirmed'
