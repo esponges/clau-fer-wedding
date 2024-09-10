@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import postgres from 'postgres';
 import nodemailer from 'nodemailer';
+import Image from 'next/image';
 
 import { ConfirmButton } from '../components/confirm-button';
 import { CountDown } from '@/components/countdown';
@@ -71,7 +72,8 @@ export default async function Home({
 
       const mailOptions = {
         from: 'clau-y-fer@gmail.com',
-        to: process.env.CONFIRMATION_EMAIL?.split(';') || process.env.GMAIL_USER,
+        to:
+          process.env.CONFIRMATION_EMAIL?.split(';') || process.env.GMAIL_USER,
         subject: status === 'confirmed' ? 'RSVP Confirmada' : 'RSVP Rechazada',
         text:
           status === 'confirmed'
@@ -108,13 +110,18 @@ export default async function Home({
 
   return (
     <main className='font-custom'>
-      <section className='relative h-screen flex items-center justify-center'>
-        <div
-          className='absolute inset-0 bg-cover bg-center'
-          style={{ backgroundImage: "url('/couple.jpg')" }}
-        ></div>
-        <div className='absolute inset-0 bg-black opacity-50'></div>
-        <div className='relative z-10 text-center text-white'>
+      <section className='relative h-screen flex items-center justify-center overflow-hidden'>
+        <Image
+          src='/couple.jpg'
+          alt='Couple background'
+          layout='fill'
+          objectFit='cover'
+          quality={100}
+          priority
+          className='z-0'
+        />
+        <div className='absolute inset-0 bg-black opacity-50 z-10'></div>
+        <div className='relative z-20 text-center text-white max-w-3xl px-4'>
           <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
           <h2 className='text-3xl font-bold mb-4'>23/11/2024</h2>
           <p className='text-2xl mb-8'>¡Nos casamos!</p>
@@ -122,14 +129,15 @@ export default async function Home({
             ¿Nos acompañaría{(guestData?.pax || 0) > 1 ? 'n' : 's'}{' '}
             {guestData?.name}?
           </p>
-          <a
-            href='#rsvp'
-            className={`bg-amber-200 text-black px-8 py-3 rounded-full
-              ${!guestData?.name ? 'hidden' : ''} 
-              font-semibold hover:bg-opacity-90 transition duration-300`}
-          >
-            Confirma tu asistencia
-          </a>
+          {guestData?.name && (
+            <a
+              href='#rsvp'
+              className='bg-amber-200 text-black px-8 py-3 rounded-full 
+                       font-semibold hover:bg-opacity-90 transition duration-300 inline-block'
+            >
+              Confirma tu asistencia
+            </a>
+          )}
         </div>
       </section>
       <section
@@ -174,9 +182,7 @@ export default async function Home({
       </section>
       <section id='venue' className='py-20 bg-gray-100'>
         <div className='max-w-6xl mx-auto px-4'>
-          <CountDown
-            date={new Date('2024-11-23T19:00:00')}
-          />
+          <CountDown date={new Date('2024-11-23T19:00:00')} />
         </div>
       </section>
       <section id='venue' className='py-20 bg-gray-50'>
