@@ -142,6 +142,11 @@ export default async function Home({
           )}
         </div>
       </section>
+      <section id='countdown' className='py-20 bg-gray-100'>
+        <div className='max-w-6xl mx-auto px-4'>
+          <CountDown date={new Date('2024-11-23T19:00:00')} />
+        </div>
+      </section>
       <section
         id='rsvp'
         className={`py-20 bg-white ${!guestData?.name ? 'hidden' : ''}`}
@@ -184,19 +189,7 @@ export default async function Home({
       </section>
       <section id='gallery' className='py-20 bg-gray-50'>
         <div className='mx-auto px-4'>
-          <Carousel
-            maxSlidesToShow={3}
-            breakpoints={[
-              { width: 640, slides: 1 },
-              { width: 1024, slides: 2 },
-              { width: Infinity, slides: 3 },
-            ]}
-          />
-        </div>
-      </section>
-      <section id='countdown' className='py-20 bg-gray-100'>
-        <div className='max-w-6xl mx-auto px-4'>
-          <CountDown date={new Date('2024-11-23T19:00:00')} />
+          <Carousel />
         </div>
       </section>
       <section id='venue' className='py-20 bg-gray-50'>

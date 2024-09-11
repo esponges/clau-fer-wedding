@@ -7,17 +7,9 @@ import { IKImage } from 'imagekitio-react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const paths = ['/cyf-1.jpeg', '/cyf-2.jpeg', '/cyf-3.jpeg'];
+const PATHS = ['/cyf-4.jpeg', '/cyf-1.jpeg', '/cyf-2.jpeg', '/cyf-3.jpeg'];
 
-const Carousel = ({
-  images = paths,
-  maxSlidesToShow = 5,
-  breakpoints = [],
-}: {
-  images?: string[];
-  maxSlidesToShow?: number;
-  breakpoints?: { width: number; slides: number }[];
-}) => {
+const Carousel = () => {
 
   const settings = {
     dots: true,
@@ -32,11 +24,11 @@ const Carousel = ({
   return (
     <div className='w-full'>
       <Slider {...settings}>
-        {images.map((_, index) => (
+        {PATHS.map((_, index) => (
           <div key={index}>
             <IKImage
               urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL}
-              path={images[index]}
+              path={PATHS[index]}
               transformation={[{ width: '1600', height: '1200', crop: 'fill' }]}
               height={1200}
               width={1600}
