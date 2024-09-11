@@ -182,7 +182,18 @@ export default async function Home({
           </form>
         </div>
       </section>
-      <Carousel />
+      <section id='gallery' className='py-20 bg-gray-50'>
+        <div className='mx-auto px-4'>
+          <Carousel
+            maxSlidesToShow={3}
+            breakpoints={[
+              { width: 640, slides: 1 },
+              { width: 1024, slides: 2 },
+              { width: Infinity, slides: 3 },
+            ]}
+          />
+        </div>
+      </section>
       <section id='countdown' className='py-20 bg-gray-100'>
         <div className='max-w-6xl mx-auto px-4'>
           <CountDown date={new Date('2024-11-23T19:00:00')} />
@@ -191,7 +202,7 @@ export default async function Home({
       <section id='venue' className='py-20 bg-gray-50'>
         <div className='max-w-6xl mx-auto px-4'>
           <h2 className='text-4xl font-bold text-center mb-10'>
-            Wedding Venue
+            Locación
           </h2>
           <div className='flex flex-col md:flex-row gap-8 items-center'>
             <div className='md:w-1/2'>
