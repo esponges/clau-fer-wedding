@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "imagekitio-react": "^4.2.0",
     "next": "14.2.5",
     "nodemailer": "^6.9.14",
     "nodemailer-mailgun-transport": "^2.1.5",
     "postgres": "^3.4.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-intersection-observer": "^9.13.1",
+    "react-slick": "^0.30.2",
+    "react-window": "^1.8.10"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -23,6 +27,8 @@
     "@types/nodemailer-mailgun-transport": "^1.4.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
+    "@types/react-window": "^1.8.8",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

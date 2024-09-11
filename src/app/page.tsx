@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { ConfirmButton } from '../components/confirm-button';
 import { CountDown } from '@/components/countdown';
+import Carousel from '@/components/carousel';
 
 const GUEST_NAME = '';
 
@@ -117,6 +118,7 @@ export default async function Home({
           layout='fill'
           objectFit='cover'
           quality={100}
+          // visible during the first load
           priority
           className='z-0'
         />
@@ -180,7 +182,8 @@ export default async function Home({
           </form>
         </div>
       </section>
-      <section id='venue' className='py-20 bg-gray-100'>
+      <Carousel />
+      <section id='countdown' className='py-20 bg-gray-100'>
         <div className='max-w-6xl mx-auto px-4'>
           <CountDown date={new Date('2024-11-23T19:00:00')} />
         </div>
