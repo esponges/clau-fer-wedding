@@ -111,14 +111,13 @@ export default async function Home({
 
   return (
     <main className='font-custom'>
-      <section className='relative h-screen flex items-center justify-center overflow-hidden'>
+      <section className='relative h-screen flex items-end justify-center overflow-hidden pb-16'>
         <Image
-          src='/couple.jpg'
+          src='/couple-2.jpg'
           alt='Couple background'
           layout='fill'
           objectFit='cover'
           quality={100}
-          // visible during the first load
           priority
           className='z-0'
         />
@@ -127,6 +126,10 @@ export default async function Home({
           <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
           <h2 className='text-3xl font-bold mb-4'>23/11/2024</h2>
           <p className='text-2xl mb-8'>¡Nos casamos!</p>
+          <div className='max-w-6xl mx-auto px-4'>
+            <CountDown date={new Date('2024-11-23T19:00:00')} />
+          </div>
+          {}
           <p className='text-2xl mb-8'>
             ¿Nos acompañaría{(guestData?.pax || 0) > 1 ? 'n' : 's'}{' '}
             {guestData?.name}?
@@ -135,7 +138,7 @@ export default async function Home({
             <a
               href='#rsvp'
               className='bg-amber-200 text-black px-8 py-3 rounded-full 
-                       font-semibold hover:bg-opacity-90 transition duration-300 inline-block'
+                   font-semibold hover:bg-opacity-90 transition duration-300 inline-block'
             >
               Confirma tu asistencia
             </a>
@@ -194,9 +197,7 @@ export default async function Home({
       </section>
       <section id='venue' className='py-20 bg-gray-50'>
         <div className='max-w-6xl mx-auto px-4'>
-          <h2 className='text-4xl font-bold text-center mb-10'>
-            Locación
-          </h2>
+          <h2 className='text-4xl font-bold text-center mb-10'>Locación</h2>
           <div className='flex flex-col md:flex-row gap-8 items-center'>
             <div className='md:w-1/2'>
               <h3 className='text-2xl font-semibold mb-4'>La Veta Eventos</h3>
