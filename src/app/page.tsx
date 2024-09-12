@@ -242,6 +242,44 @@ export default async function Home({
           </div>
         </div>
       </section>
+      {/* two images with dress code */}
+      <section id='dress-code' className='bg-gray-50'>
+        <div className='max-w-6xl mx-auto px-4'>
+          <h2 className='text-4xl font-bold text-center mb-10'>
+            Código de vestir
+          </h2>
+          <div className='flex flex-col md:flex-row gap-8 items-center text-center'>
+            <div className='md:w-1/2'>
+              <h3 className='text-3xl font-semibold mb-4'>Mujeres</h3>
+              <p className='mb-4'>
+                <Image
+                  src='/dress-code-women.jpg'
+                  alt='Women dress code'
+                  width={100}
+                  height={100}
+                  loading='lazy'
+                  className='rounded-lg shadow-lg'
+                />
+              </p>
+              <h3 className='text-xl font-semibold mb-4'>Vestido largo</h3>
+            </div>
+            <div className='md:w-1/2'>
+              <h3 className='text-2xl font-semibold mb-4'>Hombres</h3>
+              <p className='mb-4'>
+                <Image
+                  src='/dress-code-men.jpg'
+                  alt='Men dress code'
+                  width={100}
+                  height={100}
+                  loading='lazy'
+                  className='rounded-lg shadow-lg'
+                />
+              </p>
+              <h3 className='text-xl font-semibold mb-4'>Traje con corbata</h3>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id='gallery' className='py-20 bg-gray-50'>
         <div className='md:container mx-auto md:px-4'>
           <Carousel />
