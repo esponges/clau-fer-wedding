@@ -124,16 +124,17 @@ export default async function Home({
         <div className='absolute inset-0 bg-black opacity-50 z-10'></div>
         <div className='relative z-20 text-center text-white max-w-3xl px-4'>
           <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
-          <h2 className='text-3xl font-bold mb-4'>23/11/2024</h2>
-          <p className='text-2xl mb-8'>¡Nos casamos!</p>
+          <h2 className='text-xl font-bold mb-4'>23/11/2024</h2>
+          <p className='text-5xl mb-8'>¡Nos casamos!</p>
           <div className='max-w-6xl mx-auto px-4'>
             <CountDown date={new Date('2024-11-23T19:00:00')} />
           </div>
-          {}
-          <p className='text-2xl mb-8'>
-            ¿Nos acompañaría{(guestData?.pax || 0) > 1 ? 'n' : 's'}{' '}
-            {guestData?.name}?
-          </p>
+          {guestData?.name ? (
+            <p className='text-2xl mb-8'>
+              ¿Nos acompañaría{(guestData.pax || 0) > 1 ? 'n' : 's'}{' '}
+              {guestData.name}?
+            </p>
+          ) : null}
           {guestData?.name && (
             <a
               href='#rsvp'
@@ -145,18 +146,17 @@ export default async function Home({
           )}
         </div>
       </section>
-      <section id='countdown' className='py-20 bg-gray-100'>
-        <div className='max-w-6xl mx-auto px-4'>
-          <CountDown date={new Date('2024-11-23T19:00:00')} />
-        </div>
-      </section>
       <section
         id='rsvp'
         className={`py-20 bg-white ${!guestData?.name ? 'hidden' : ''}`}
       >
         <div className='max-w-3xl mx-auto px-4'>
-          <h2 className='text-4xl font-bold text-center'>Claudia & Fer</h2>
-          <h2 className='text-2xl font-bold text-center mb-10'>23/11/2024</h2>
+          <h2 className='text-4xl font-bold text-center'>{guestData?.name}</h2>
+          <h2 className='text-2xl mt-4 font-bold text-center mb-10'>
+            {guestData && guestData.pax > 1
+              ? `${guestData?.pax} pases`
+              : '1 pase'}
+          </h2>
           <form className='space-y-6' action={confirmRsvp}>
             <input
               type='hidden'
@@ -190,9 +190,22 @@ export default async function Home({
           </form>
         </div>
       </section>
-      <section id='gallery' className='py-20 bg-gray-50'>
-        <div className='md:container mx-auto md:px-4'>
-          <Carousel />
+      <section className='relative h-screen flex items-center justify-center overflow-hidden pt-24'>
+        <Image
+          src='/couple-3.jpg'
+          alt='Couple smilling'
+          layout='fill'
+          objectFit='cover'
+          quality={100}
+          loading='lazy'
+          className='z-0'
+        />
+        <div className='absolute inset-0 bg-black opacity-50 z-10'></div>
+        <div className='relative z-20 text-center text-white max-w-3xl px-4'>
+          <h1 className='text-3xl font-bold mb-4'>
+            Cuando te das cuenta de que quieres pasar el resto de tu vida con
+            alguien, deseas que el resto de tu vida empiece lo antes posible.
+          </h1>
         </div>
       </section>
       <section id='venue' className='py-20 bg-gray-50'>
@@ -227,6 +240,11 @@ export default async function Home({
               ></iframe>
             </div>
           </div>
+        </div>
+      </section>
+      <section id='gallery' className='py-20 bg-gray-50'>
+        <div className='md:container mx-auto md:px-4'>
+          <Carousel />
         </div>
       </section>
     </main>

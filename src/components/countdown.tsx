@@ -68,9 +68,6 @@ export function CountDown({ date }: { date: Date }) {
 
   return (
     <div className='shadow-lg rounded-lg p-6 max-w-2xl mx-auto'>
-      <h2 className='text-3xl font-bold text-center text-white mb-6'>
-        Solo faltan
-      </h2>
       <div className='grid grid-cols-4 gap-4 text-white'>
         <CountdownItem value={count.days.toString()} label='Días' />
         <CountdownItem
