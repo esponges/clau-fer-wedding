@@ -188,7 +188,7 @@ export default async function Home({
         </div>
       </section>
       <section id='gallery' className='py-20 bg-gray-50'>
-        <div className='mx-auto px-4'>
+        <div className='md:container mx-auto md:px-4'>
           <Carousel />
         </div>
       </section>

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import Slider from 'react-slick';
+import React from 'react';
+import Slider, { type Settings } from 'react-slick';
 import { IKImage } from 'imagekitio-react';
 
 import "slick-carousel/slick/slick.css";
@@ -11,7 +11,7 @@ const PATHS = ['/cyf-4.jpeg', '/cyf-1.jpeg', '/cyf-2.jpeg', '/cyf-3.jpeg'];
 
 const Carousel = () => {
 
-  const settings = {
+  const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -19,17 +19,20 @@ const Carousel = () => {
     slidesToScroll: 1,
     adaptiveHeight: true,
     arrows: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
   };
 
   return (
     <div className='w-full'>
       <Slider {...settings}>
         {PATHS.map((_, index) => (
-          <div key={index}>
+          <div key={index} className='md:px-10'>
             <IKImage
               urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL}
               path={PATHS[index]}
-              transformation={[{ width: '1600', height: '1200', crop: 'fill' }]}
+              className='md:max-h-[100vh] object-cover object-[center_top]'
+              transformation={[{ width: '1600', height: '1200'}]}
               height={1200}
               width={1600}
               loading={index > 0 ? 'lazy' : undefined}
