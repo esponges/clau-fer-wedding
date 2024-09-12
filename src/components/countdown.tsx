@@ -6,8 +6,15 @@ const initialCount = {
   days: 0,
   hours: 0,
   mins: 0,
-  secs: 0
+  secs: 0,
 };
+
+const CountdownItem = ({ value, label }: { value: string; label: string }) => (
+  <div className='flex flex-col items-center'>
+    <div className='text-4xl font-bold mb-2 w-20 text-center'>{value}</div>
+    <div className='text-sm'>{label}</div>
+  </div>
+);
 
 export function CountDown({ date }: { date: Date }) {
   const [count, setCount] = useState<{
@@ -60,13 +67,24 @@ export function CountDown({ date }: { date: Date }) {
   }, [date]);
 
   return (
-    <div className='bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto'>
-      <h2 className='text-3xl font-bold text-center text-gray-800 mb-6'>
+    <div className='shadow-lg rounded-lg p-6 max-w-2xl mx-auto'>
+      <h2 className='text-3xl font-bold text-center text-white mb-6'>
         Solo faltan
       </h2>
-      <div className='flex text-2xl justify-center'>
-        {`${count.days}d:${count.hours}h:${count.mins}m:${count.secs}s`}
-        <span className='ml-4 text-indigo-600'>para el gran día!</span>
+      <div className='grid grid-cols-4 gap-4 text-white'>
+        <CountdownItem value={count.days.toString()} label='Días' />
+        <CountdownItem
+          value={count.hours.toString().padStart(2, '0')}
+          label='Horas'
+        />
+        <CountdownItem
+          value={count.mins.toString().padStart(2, '0')}
+          label='Minutos'
+        />
+        <CountdownItem
+          value={count.secs.toString().padStart(2, '0')}
+          label='Segundos'
+        />
       </div>
     </div>
   );
