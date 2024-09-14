@@ -7,7 +7,7 @@ import { IKImage } from 'imagekitio-react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const PATHS = ['/cyf-4.jpeg', '/cyf-1.jpeg', '/cyf-2.jpeg', '/cyf-3.jpeg'];
+const PATHS = ['/carousel-4.jpg', '/carousel-1.jpg', '/carousel-2.jpg', '/carousel-3.jpg'];
 
 const Carousel = () => {
 

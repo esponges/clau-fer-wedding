@@ -115,7 +115,7 @@ export default async function Home({
         <Image
           src='/couple-2.jpg'
           alt='Couple background'
-          layout='fill'
+          fill
           objectFit='cover'
           quality={100}
           priority
@@ -280,7 +280,7 @@ export default async function Home({
           </div>
         </div>
       </section>
-      <section id='gallery' className='py-20 bg-gray-50'>
+      <section id='gallery' className='pb-20 bg-gray-50'>
         <div className='md:container mx-auto md:px-4'>
           <Carousel />
         </div>
