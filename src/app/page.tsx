@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ConfirmButton } from '../components/confirm-button';
 import { CountDown } from '@/components/countdown';
 import Carousel from '@/components/carousel';
+import { Gifts } from '@/components/gifts';
 
 const GUEST_NAME = '';
 
@@ -113,7 +114,7 @@ export default async function Home({
     <main className='font-custom'>
       <section className='relative h-screen flex items-end justify-center overflow-hidden pb-16'>
         <Image
-          src='/couple-2.jpg'
+          src='/img/couple-2.jpg'
           alt='Couple background'
           fill
           objectFit='cover'
@@ -192,7 +193,7 @@ export default async function Home({
       </section>
       <section className='relative h-screen flex items-center justify-center overflow-hidden pt-24'>
         <Image
-          src='/couple-3.jpg'
+          src='/img/couple-3.jpg'
           alt='Couple smilling'
           layout='fill'
           objectFit='cover'
@@ -242,7 +243,9 @@ export default async function Home({
           </div>
         </div>
       </section>
-      {/* two images with dress code */}
+      <section id='gift' className='py-20 bg-gray-200 text-center'>
+        <Gifts />
+      </section>
       <section id='dress-code' className='bg-gray-50'>
         <div className='max-w-6xl mx-auto px-4 py-12'>
           <h2 className='text-4xl font-bold text-center mb-10'>
@@ -253,7 +256,7 @@ export default async function Home({
               <h3 className='text-3xl font-semibold mb-4'>Mujeres</h3>
               <div className='mb-4'>
                 <Image
-                  src='/dress-code-women.jpg'
+                  src='/img/dress-code-women.jpg'
                   alt='Women dress code'
                   width={200}
                   height={200}
@@ -267,7 +270,7 @@ export default async function Home({
               <h3 className='text-2xl font-semibold mb-4'>Hombres</h3>
               <div className='mb-4'>
                 <Image
-                  src='/dress-code-men.jpg'
+                  src='/img/dress-code-men.jpg'
                   alt='Men dress code'
                   width={200}
                   height={200}
@@ -277,29 +280,6 @@ export default async function Home({
               </div>
               <h3 className='text-xl font-semibold mb-4'>Traje con corbata</h3>
             </div>
-          </div>
-        </div>
-      </section>
-      {/* single vertical image */}
-      <section id='gift' className='py-20 bg-gray-50'>
-        <div className='max-w-6xl mx-auto px-4'>
-          <h2 className='text-4xl font-bold text-center mb-10'>
-            Regalos
-          </h2>
-          <div className='text-center'>
-            <div className='mb-4'>
-              <Image
-                src='/gift.jpg'
-                alt='Gift'
-                width={200}
-                height={200}
-                loading='lazy'
-                className='rounded-lg shadow-lg mx-auto'
-              />
-            </div>
-            <h3 className='text-2xl font-semibold mb-4'>
-              Regalos especiales
-            </h3>
           </div>
         </div>
       </section>
