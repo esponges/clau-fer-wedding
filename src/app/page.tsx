@@ -41,6 +41,67 @@ async function getGuestData(uuid?: string): Promise<GuestData | null> {
   }
 }
 
+async function confirmRsvp(formData: FormData) {
+  'use server';
+
+  const rsvp = formData.get('rsvp') as string;
+  const status = rsvp === 'yes' ? 'confirmed' : 'rejected';
+  const id = formData.get('id') as string;
+  const guest = formData.get('guest') as string;
+
+  let redirectUrl = '';
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: 'clau-y-fer@gmail.com',
+      to:
+        process.env.CONFIRMATION_EMAIL?.split(';') || process.env.GMAIL_USER,
+      subject: status === 'confirmed' ? 'RSVP Confirmada' : 'RSVP Rechazada',
+      text:
+        status === 'confirmed'
+          ? `${guest} ha confirmado su invitación`
+          : `${guest} ha rechazado su invitación`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+    const sqlClient = postgres(
+      process.env.POSTGRES_DB_CONNECTION_STRING || ''
+    );
+    await sqlClient`
+      UPDATE guests
+      SET status = ${status}
+      WHERE id = ${id}
+    `;
+
+    console.log('Upserted ' + id);
+    redirectUrl = `/thank-you?guest=${id}&name=${guest}`;
+  } catch (error) {
+    console.error(error);
+    redirectUrl = '/oops?guest=' + id;
+  } finally {
+    // redirection in server components must be done through the `finally` block
+    // https://stackoverflow.com/a/77738506/13772033
+    redirect(redirectUrl);
+  }
+}
+
 export default async function Home({
   searchParams,
 }: {
@@ -48,67 +109,6 @@ export default async function Home({
 }) {
   const guestId = searchParams['guest'] || GUEST_NAME;
   const guestData = await getGuestData(guestId);
-
-  console.log({ guestData });
-
-  async function confirmRsvp(formData: FormData) {
-    'use server';
-
-    const rsvp = formData.get('rsvp') as string;
-    const status = rsvp === 'yes' ? 'confirmed' : 'rejected';
-    const id = formData.get('id') as string;
-    const guest = formData.get('guest') as string;
-
-    let redirectPath: string = '';
-    try {
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_APP_PASS,
-        },
-      });
-
-      const mailOptions = {
-        from: 'clau-y-fer@gmail.com',
-        to:
-          process.env.CONFIRMATION_EMAIL?.split(';') || process.env.GMAIL_USER,
-        subject: status === 'confirmed' ? 'RSVP Confirmada' : 'RSVP Rechazada',
-        text:
-          status === 'confirmed'
-            ? `${guest} ha confirmado su invitación`
-            : `${guest} ha rechazado su invitación`,
-      };
-
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-
-      const sqlClient = postgres(
-        process.env.POSTGRES_DB_CONNECTION_STRING || ''
-      );
-      await sqlClient`
-        UPDATE guests
-        SET status = ${status}
-        WHERE id = ${id}
-      `;
-
-      console.log('Upserted ' + id);
-      redirectPath = `/thank-you?guest=${id}&status=${status}`;
-    } catch (error) {
-      console.error(error);
-      redirectPath = '/oops?guest=' + id;
-    } finally {
-      redirect(redirectPath);
-    }
-  }
 
   return (
     <main className='font-custom'>
@@ -158,6 +158,9 @@ export default async function Home({
               ? `${guestData?.pax} pases`
               : '1 pase'}
           </h2>
+          <h3 className='text-md font-bold text-center mb-10'>
+            * Personal e intransferible
+          </h3>
           <form className='space-y-6' action={confirmRsvp}>
             <input
               type='hidden'

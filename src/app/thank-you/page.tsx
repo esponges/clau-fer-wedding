@@ -6,24 +6,24 @@ export default function ThankYou({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const guestName = searchParams['guest'];
+  const guestName = searchParams['name'];
+  const guestId = searchParams['guest'];
 
   return (
     <main className='font-custom'>
       <div className='min-h-screen bg-gray-100 flex flex-col justify-center items-center'>
         <Head>
-          <title>Thank You | Our Wedding Invitation</title>
+          <title>¡Gracias! | Nuestra Boda</title>
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
         <main className='text-center px-4'>
           <div className='bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto'>
             <h1 className='text-4xl font-bold text-gray-800 mb-4'>
-              Thank You!
+              ¡Gracias {guestName}!
             </h1>
             <p className='text-xl text-gray-600 mb-6'>
-              Weve received your RSVP and were excited to celebrate our special
-              day with you.
+              Hemos recibido tu confirmación. ¡Nos vemos pronto!
             </p>
             <div className='mb-8'>
               <svg
@@ -42,19 +42,19 @@ export default function ThankYou({
               </svg>
             </div>
             <p className='text-gray-600 mb-6'>
-              Well be in touch with more details as the big day approaches.
+              Seguiremos en contacto para más detalles.
             </p>
             <Link
-              href='/'
+              href={`/guest=${guestId}`}
               className='inline-block bg-amber-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-amber-700 transition duration-300'
             >
-              Back to Home
+              Regresar
             </Link>
           </div>
         </main>
 
         <footer className='mt-8 text-center text-gray-500'>
-          <p>&copy; 2024 Jane & Johns Wedding. All rights reserved.</p>
+          <p>&copy; 2024 Claudia & Fer.</p>
         </footer>
       </div>
     </main>

@@ -28,14 +28,14 @@ export default function Oops({
               Back to Home
             </Link>
             <p className="text-gray-500">
-              If the problem persists, please email us at <a href="mailto:contact@janeandjohn.com" className="text-indigo-600 hover:underline">contact@janeandjohn.com</a>
+              If the problem persists, please email us at <a href="mailto:claubechauri12@gmail.com" className="text-indigo-600 hover:underline">contact@janeandjohn.com</a>
             </p>
           </div>
         </div>
       </main>
 
       <footer className="mt-8 text-center text-gray-500">
-        <p>&copy; 2024 Jane & Johns Wedding. All rights reserved.</p>
+        <p>&copy; 2024 Claudia & Fer. All rights reserved.</p>
       </footer>
     </div>
   );
