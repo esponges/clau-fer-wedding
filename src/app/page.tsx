@@ -159,7 +159,7 @@ export default async function Home({
               : '1 pase'}
           </h2>
           <h3 className='text-md font-bold text-center mb-10'>
-            * Personal e intransferible
+            * No niños
           </h3>
           <form className='space-y-6' action={confirmRsvp}>
             <input

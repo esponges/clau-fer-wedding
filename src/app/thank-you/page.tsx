@@ -45,7 +45,7 @@ export default function ThankYou({
               Seguiremos en contacto para más detalles.
             </p>
             <Link
-              href={`/guest=${guestId}`}
+              href={`/?guest=${guestId}`}
               className='inline-block bg-amber-400 text-white px-6 py-3 rounded-full font-semibold hover:bg-amber-700 transition duration-300'
             >
               Regresar
