@@ -15,12 +15,13 @@ type GuestData = {
   name: string;
   status: 'pending' | 'rejected' | 'confirmed';
   pax: number;
+  new_id: number;
 };
 
-async function getGuestData(uuid?: string): Promise<GuestData | null> {
+async function getGuestData(id?: string): Promise<GuestData | null> {
   'use server';
 
-  if (!uuid) {
+  if (!id) {
     return null;
   }
 
@@ -29,11 +30,11 @@ async function getGuestData(uuid?: string): Promise<GuestData | null> {
 
     const data = await sqlClient`
       SELECT * FROM guests
-      WHERE id = ${uuid}
+      WHERE new_id = ${id}
     `;
 
     const guest = data[0] as GuestData;
-
+    
     return guest;
   } catch (error) {
     console.error(error);
