@@ -34,8 +34,17 @@ async function getGuestData(id?: string): Promise<GuestData | null> {
     `;
 
     const guest = data[0] as GuestData;
-    
-    return guest;
+
+    // transform to capitalized only the first letter
+    const name = guest.name
+      .split(' ')
+      .map((word) => word !== 'Y' ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : word.toLowerCase())
+      .join(' ');
+
+    return {
+      ...guest,
+      name,
+    };
   } catch (error) {
     console.error(error);
     return null;
