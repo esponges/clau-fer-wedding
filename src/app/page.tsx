@@ -239,7 +239,7 @@ export default async function Home({
               <p className='mb-4'>
                 <strong>Fecha:</strong> 23 de Noviembre, 2024
                 <br />
-                <strong>Horario:</strong> 5:00 PM - 11:00 PM
+                <strong>Horario:</strong> 5:30 PM - 01:00 AM
               </p>
             </div>
             <div className='md:w-1/2 px-4'>

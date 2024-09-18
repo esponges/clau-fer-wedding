@@ -32,7 +32,7 @@ const Carousel = () => {
       <IKImage
         urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL}
         path='full-sized.jpg'
-        className='md:max-h-[100vh] p-10 object-cover object-[center_bottom]' 
+        className='p-10 mx-auto object-cover object-[center_bottom]' 
         transformation={[{ width: '1200', height: '1600' }]}
         width={1200}
         height={1600}

@@ -18,8 +18,13 @@ export function Gifts() {
           alt='Gift'
         />
       </div>
-      <h3 className='text-2xl font-semibold mb-4'>
-        La mesa de regalos es la 12345678
+      <h3 className='text-2xl md:w-1/2 mx-auto font-semibold mb-4'>
+        Para nosotros tu presencia es nuestro mejor regalo, pero si deseas
+        hacernos llegar un obsequio, aquí está nuestro número de cuenta: <br /><br />
+        
+        BBVA<br />
+        Cuenta: 287 888 4897 <br />
+        CLABE: 012 320 02878884897 5
       </h3>
     </div>
   );
