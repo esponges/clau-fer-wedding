@@ -35,7 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-scripts/guests-list.ts
+# scripts/guests-list.ts
 
 .env
 
