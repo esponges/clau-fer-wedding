@@ -20,7 +20,7 @@ export function Gifts() {
       </div>
       <h3 className='text-2xl md:w-1/2 mx-auto font-semibold mb-4'>
         Para nosotros tu presencia es nuestro mejor regalo, pero si deseas
-        hacernos llegar un obsequio, aquí está nuestro número de cuenta: <br /><br />
+        hacernos un obsequio, aquí está nuestro número de cuenta: <br /><br />
         
         BBVA<br />
         Cuenta: 287 888 4897 <br />

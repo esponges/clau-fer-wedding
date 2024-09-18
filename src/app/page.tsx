@@ -206,7 +206,7 @@ export default async function Home({
       </section>
       <section className='relative h-screen flex items-center justify-center overflow-hidden pt-24'>
         <Image
-          src='/img/couple-3.jpg'
+          src='/img/couple-4.jpg'
           alt='Couple smilling'
           layout='fill'
           objectFit='cover'
