@@ -10,8 +10,8 @@ export default function ThankYou({
   const guestId = searchParams['guest'];
 
   return (
-    <main className='font-custom'>
-      <div className='min-h-screen bg-gray-100 flex flex-col justify-center items-center'>
+    <main>
+      <div className='min-h-screen bg-gray-100 flex flex-col justify-center items-center font-dancing'>
         <Head>
           <title>¡Gracias! | Nuestra Boda</title>
           <link rel='icon' href='/favicon.ico' />

@@ -121,7 +121,7 @@ export default async function Home({
   const guestData = await getGuestData(guestId);
 
   return (
-    <main className='font-custom'>
+    <main className='font-dancing'>
       <section className='relative h-screen flex items-end justify-center overflow-hidden pb-16'>
         <Image
           src='/img/couple-2.jpg'
@@ -132,9 +132,9 @@ export default async function Home({
           priority
           className='z-0'
         />
-        <div className='absolute inset-0 bg-black opacity-50 z-10'></div>
+        <div className='absolute inset-0 bg-black opacity-20 z-10'></div>
         <div className='relative z-20 text-center text-white max-w-3xl px-4'>
-          <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
+          <h1 className='text-4xl font-bold mb-4'>Claudia & Fer</h1>
           <h2 className='text-xl font-bold mb-4'>23/11/2024</h2>
           <p className='md:text-5xl text-2xl'>¡Nos casamos!</p>
           <div className='max-w-6xl mx-auto px-4'>
@@ -214,9 +214,9 @@ export default async function Home({
           loading='lazy'
           className='z-0'
         />
-        <div className='absolute inset-0 bg-black opacity-20 z-10'></div>
+        <div className='absolute inset-0 z-10'></div>
         <div className='relative z-20 text-center text-white max-w-3xl px-4'>
-          <h1 className='text-3xl font-bold mb-4'>
+          <h1 className='text-2xl font-bold mb-12'>
             Cuando te das cuenta de que quieres pasar el resto de tu vida con
             alguien, deseas que el resto de tu vida empiece lo antes posible.
           </h1>
@@ -225,7 +225,7 @@ export default async function Home({
       <section id='venue' className='py-20 bg-gray-50'>
         <div className='max-w-6xl mx-auto px-4'>
           <h2 className='text-4xl font-bold text-center mb-10'>Locación</h2>
-          <div className='flex flex-col md:flex-row gap-8 items-center'>
+          <div className='flex flex-col md:flex-row gap-8 items-center font-sans'>
             <div className='md:w-1/2'>
               <h3 className='text-2xl font-semibold mb-4'>La Veta Eventos</h3>
               <p className='mb-4'>
@@ -256,13 +256,13 @@ export default async function Home({
           </div>
         </div>
       </section>
-      <section id='gift' className='py-20 bg-gray-200 text-center'>
+      <section id='gift' className='py-20 bg-gray-200 text-center font-sans'>
         <Gifts />
       </section>
       <section id='dress-code' className='bg-gray-50'>
         <div className='max-w-6xl mx-auto px-4 py-12'>
           <h2 className='text-4xl font-bold text-center mb-10'>
-            Código de vestir
+            Dresscode
           </h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             <div className='text-center'>
@@ -280,7 +280,7 @@ export default async function Home({
               <h3 className='text-xl font-semibold mb-4'>Vestido largo</h3>
             </div>
             <div className='text-center'>
-              <h3 className='text-2xl font-semibold mb-4'>Hombres</h3>
+              <h3 className='text-3xl font-semibold mb-4'>Hombres</h3>
               <div className='mb-4'>
                 <Image
                   src='/img/dress-code-men.jpg'

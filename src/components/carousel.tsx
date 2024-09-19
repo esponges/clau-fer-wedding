@@ -49,7 +49,7 @@ const Carousel = () => {
               transformation={[{ width: '1600', height: '1200' }]}
               height={1200}
               width={1600}
-              loading={index > 0 ? 'lazy' : undefined}
+              loading='lazy'
               alt={`Clau&fer-${index + 1}`}
             />
           </div>

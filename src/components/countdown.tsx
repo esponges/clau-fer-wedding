@@ -11,7 +11,7 @@ const initialCount = {
 
 const CountdownItem = ({ value, label }: { value: string; label: string }) => (
   <div className='flex flex-col items-center'>
-    <div className='text-4xl font-bold mb-2 w-20 text-center'>{value}</div>
+    <div className='text-2xl font-bold mb-2 w-20 text-center'>{value}</div>
     <div className='text-sm'>{label}</div>
   </div>
 );
