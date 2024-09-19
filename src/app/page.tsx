@@ -136,7 +136,7 @@ export default async function Home({
         <div className='relative z-20 text-center text-white max-w-3xl px-4'>
           <h1 className='text-5xl font-bold mb-4'>Claudia & Fer</h1>
           <h2 className='text-xl font-bold mb-4'>23/11/2024</h2>
-          <p className='text-5xl mb-8'>¡Nos casamos!</p>
+          <p className='md:text-5xl text-2xl'>¡Nos casamos!</p>
           <div className='max-w-6xl mx-auto px-4'>
             <CountDown date={new Date('2024-11-23T19:00:00')} />
           </div>
@@ -204,7 +204,7 @@ export default async function Home({
           </form>
         </div>
       </section>
-      <section className='relative h-screen flex items-center justify-center overflow-hidden pt-24'>
+      <section className='relative h-screen flex items-end justify-center overflow-hidden pt-24'>
         <Image
           src='/img/couple-4.jpg'
           alt='Couple smilling'
@@ -214,7 +214,7 @@ export default async function Home({
           loading='lazy'
           className='z-0'
         />
-        <div className='absolute inset-0 bg-black opacity-50 z-10'></div>
+        <div className='absolute inset-0 bg-black opacity-20 z-10'></div>
         <div className='relative z-20 text-center text-white max-w-3xl px-4'>
           <h1 className='text-3xl font-bold mb-4'>
             Cuando te das cuenta de que quieres pasar el resto de tu vida con

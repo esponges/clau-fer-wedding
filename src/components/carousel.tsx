@@ -31,7 +31,7 @@ const Carousel = () => {
     <div className='w-full'>
       <IKImage
         urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL}
-        path='full-sized.jpg'
+        path='couple-1.jpg'
         className='p-10 mx-auto object-cover object-[center_bottom]' 
         transformation={[{ width: '1200', height: '1600' }]}
         width={1200}
