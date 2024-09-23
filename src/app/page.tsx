@@ -7,6 +7,8 @@ import { ConfirmButton } from '../components/confirm-button';
 import { CountDown } from '@/components/countdown';
 import Carousel from '@/components/carousel';
 import { Gifts } from '@/components/gifts';
+import { DressCode } from '@/components/dresscode';
+import { Map } from '@/components/map';
 
 const GUEST_NAME = '';
 
@@ -223,78 +225,13 @@ export default async function Home({
         </div>
       </section>
       <section id='venue' className='py-20 bg-gray-50'>
-        <div className='max-w-6xl mx-auto px-4'>
-          <h2 className='text-4xl font-bold text-center mb-10'>Locación</h2>
-          <div className='flex flex-col md:flex-row gap-8 items-center font-sans'>
-            <div className='md:w-1/2'>
-              <h3 className='text-2xl font-semibold mb-4'>La Veta Eventos</h3>
-              <p className='mb-4'>
-                C. Volcán Ajusco 4830, Colli Urbano, 45070 Zapopan, Jal.
-              </p>
-              <p className='mb-4'>
-                {/* Join us for a magical evening at The Grand Ballroom, where we'll
-                exchange vows and celebrate our love with friends and family. */}
-                Acompáñanos a una gran noche en La Veta Eventos.
-              </p>
-              <p className='mb-4'>
-                <strong>Fecha:</strong> 23 de Noviembre, 2024
-                <br />
-                <strong>Horario:</strong> 5:30 PM - 01:00 AM
-              </p>
-            </div>
-            <div className='md:w-1/2 px-4'>
-              <iframe
-                width='100%'
-                height='450'
-                loading='lazy'
-                allowFullScreen
-                className='rounded-lg shadow-lg mx-auto'
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                  &q=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_WEDDING_LOCATION}`}
-              ></iframe>
-            </div>
-          </div>
-        </div>
+        <Map />
       </section>
       <section id='gift' className='py-20 bg-gray-200 text-center font-sans'>
         <Gifts />
       </section>
       <section id='dress-code' className='bg-gray-50'>
-        <div className='max-w-6xl mx-auto px-4 py-12'>
-          <h2 className='text-4xl font-bold text-center mb-10'>
-            Dresscode
-          </h2>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <div className='text-center'>
-              <h3 className='text-3xl font-semibold mb-4'>Mujeres</h3>
-              <div className='mb-4'>
-                <Image
-                  src='/img/dress-code-women.jpg'
-                  alt='Women dress code'
-                  width={200}
-                  height={200}
-                  loading='lazy'
-                  className='rounded-lg shadow-lg mx-auto'
-                />
-              </div>
-              <h3 className='text-xl font-semibold mb-4'>Vestido largo</h3>
-            </div>
-            <div className='text-center'>
-              <h3 className='text-3xl font-semibold mb-4'>Hombres</h3>
-              <div className='mb-4'>
-                <Image
-                  src='/img/dress-code-men.jpg'
-                  alt='Men dress code'
-                  width={200}
-                  height={200}
-                  loading='lazy'
-                  className='rounded-lg shadow-lg mx-auto'
-                />
-              </div>
-              <h3 className='text-xl font-semibold mb-4'>Traje con corbata</h3>
-            </div>
-          </div>
-        </div>
+        <DressCode />
       </section>
       <section id='gallery' className='pb-20 bg-gray-50'>
         <div className='md:container mx-auto md:px-4'>

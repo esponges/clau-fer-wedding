@@ -1,3 +1,6 @@
+import { DressCode } from '@/components/dresscode';
+import { Gifts } from '@/components/gifts';
+import { Map } from '@/components/map';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -17,7 +20,7 @@ export default function ThankYou({
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        <main className='text-center px-4'>
+        <div className='text-center p-4'>
           <div className='bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto'>
             <h1 className='text-4xl font-bold text-gray-800 mb-4'>
               ¡Gracias {guestName}!
@@ -51,12 +54,16 @@ export default function ThankYou({
               Regresar
             </Link>
           </div>
-        </main>
-
-        <footer className='mt-8 text-center text-gray-500'>
-          <p>&copy; 2024 Claudia & Fer.</p>
-        </footer>
+        </div>
+        <div className='my-12'>
+          <Map />
+          <DressCode />
+          <Gifts />
+        </div>
       </div>
+      <footer className='text-center text-gray-500 flex items-center justify-center'>
+        <p>&copy; 2024 Claudia & Fer.</p>
+      </footer>
     </main>
   );
 }

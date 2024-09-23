@@ -6,7 +6,7 @@ dotenv.config();
 
 const sqlClient = postgres(process.env.POSTGRES_DB_CONNECTION_STRING || '');
 
-guestList.forEach(async ({ name, pax, status }) => {
+guestList.forEach(async ({ name, pax, status, id }) => {
   try {
     await sqlClient`
       INSERT INTO guests (id, name, status, pax)
