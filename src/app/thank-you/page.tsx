@@ -55,7 +55,7 @@ export default function ThankYou({
             </Link>
           </div>
         </div>
-        <div className='my-12'>
+        <div className='my-12' id='details'>
           <Map />
           <DressCode />
           <Gifts />

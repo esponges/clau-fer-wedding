@@ -6,8 +6,8 @@ export const list: {
   pax: number;
 }[] = [
   {
-    pax: 3,
-    name: 'Victor Gabriel',
+    pax: 2,
+    name: 'Andrea y Beto',
     status: 'pending',
   },
 ];
